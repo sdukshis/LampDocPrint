@@ -38,5 +38,16 @@ class LoginTestCase(TestCase):
 
         self.assertEqual(response.content.find('alert-danger'), -1)
 
+    def test_logout(self):
+        c = Client()
+        c.login(username=self.USER, password=self.PASS)
+
+        response = c.get('/accounts/logout/', follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.redirect_chain, 
+                        [('http://testserver/', 302),
+                         ('http://testserver/accounts/login/?next=/', 302)])
+
 
 
