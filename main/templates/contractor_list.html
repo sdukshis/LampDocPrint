@@ -1,0 +1,24 @@
+{% extends "main.html" %}
+{% load bootstrap %}
+
+{% block container %}
+    <a href="{% url 'main.views.add_contractor' %}"><button class="btn btn-primary" type="button">Add contractor</button></a>
+    <table class="table table-striped table-hover" data-provides="rowlink">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contractor in contractors %}
+                <tr onclick="location.href='{% url 'main.views.contractor' contractor.id %}'">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ contractor.name_eng}}</td>
+                    <td>{{ contractor.address_eng}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
