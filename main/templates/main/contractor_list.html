@@ -2,7 +2,14 @@
 {% load bootstrap %}
 
 {% block container %}
-    <a href="{% url 'main.views.add_contractor' %}"><button class="btn btn-primary" type="button">Add contractor</button></a>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'contractor_add' %}"><button class="btn btn-primary" type="button">Add contractor</button></a>
     <table class="table table-striped table-hover" data-provides="rowlink">
         <thead>
             <tr>
@@ -12,8 +19,8 @@
             </tr>
         </thead>
         <tbody>
-            {% for contractor in contractors %}
-                <tr onclick="location.href='{% url 'main.views.contractor' contractor.id %}'">
+            {% for contractor in object_list %}
+                <tr onclick="location.href='{% url 'contractor_update' contractor.id %}'">
                     <td>{{ forloop.counter }}</td>
                     <td>{{ contractor.name_eng}}</td>
                     <td>{{ contractor.address_eng}}</td>

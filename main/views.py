@@ -1,32 +1,40 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
+from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages 
 
 from main.models import Contractor
-from main.forms import ContractorForm
 
 # Create your views here.
 @login_required
 def home(request):
     return render(request, 'home.html')
 
-@login_required
-def add_contractor(request):
-    if request.method == 'POST':
-        form = ContractorForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect(list_contractor)
-    else:
-        form = ContractorForm()
-    return render(request, 'contractor.html', {'form': form})
+class ContractorList(ListView):
+    model = Contractor
 
-@login_required
-def contractor(request, id=None):
-    contractor = get_object_or_404(Contractor, pk=id)
-    form = ContractorForm(instance=contractor)
-    return render(request, 'contractor.html', {'form': form})
 
-@login_required
-def list_contractor(request):
-    contractors = Contractor.objects.all()
-    return render(request, 'contractor_list.html', {'contractors': contractors})
+class ContractorCreate(CreateView):
+    model = Contractor
+    def form_valid(self, form):
+        messages.success(self.request, "Successfully saved!")
+        return super(ContractorCreate, self).form_valid(form)
+
+
+class ContractorUpdate(UpdateView):
+    model = Contractor
+
+    def form_valid(self, form):
+        messages.success(self.request, "Successfully saved!")
+        return super(ContractorUpdate, self).form_valid(form)
+
+
+class ContractorDelete(DeleteView):
+    model = Contractor
+    success_url = reverse_lazy('contractors')
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, "Object deleted!")
+        return super(ContractorDelete, self).delete(request, *args, **kwargs)

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -19,3 +19,9 @@ class Contractor(Changeable):
     address_rus = models.CharField(verbose_name=u'Адрес (рус.)',
                                      max_length=512)
     # logo = models.ImageField(verbose_name=u'Логотип', upload_to='/logo/')
+
+    def __unicode__(self):
+        return self.name_eng
+        
+    def get_absolute_url(self):
+        return reverse('contractor_update', kwargs={'pk': self.pk})

@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+{% load bootstrap %}
+
+{% block container %}
+    <div class="alert alert-danger">
+        Are you sure want to delete "{{ object }}"?
+    </div>
+    <form class="form-horizontal" role="form" action="" method="post">
+    {% csrf_token %}
+        <div class="col-md-1 col-md-offset-5">
+            <button type="submit" class="btn btn-danger">Yes</button>
+        </div>
+        <div class="col-md-1">
+            <a href="{% url 'contractor_update' object.pk %}" class="btn btn-primary">No</a>
+        </div>
+    </div>
+    </form>
+{% endblock %}
