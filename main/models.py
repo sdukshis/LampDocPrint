@@ -25,3 +25,26 @@ class Contractor(Changeable):
         
     def get_absolute_url(self):
         return reverse('contractor_update', kwargs={'pk': self.pk})
+
+
+class Brand(models.Model):
+    name = models.CharField(verbose_name=u'Brand', max_length=256)
+
+    def __unicode__(self):
+        return self.name
+
+
+class Series(models.Model):
+    name = models.CharField(verbose_name=u'Series', max_length=256)
+
+    def __unicode__(self):
+        return self.name
+
+        
+class LampModel(Changeable):
+    brand = models.ForeignKey(Brand, verbose_name=u'Brand')
+    art = models.CharField(verbose_name=u'Аrticle', max_length=512)
+    name = models.CharField(verbose_name=u'Name', max_length=512)
+    contractor = models.ForeignKey(Contractor, verbose_name=u'Contractor')
+    contractor_art = models.CharField(verbose_name=u'Contractor article', max_length=512)
+    series = models.CharField
