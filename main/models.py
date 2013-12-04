@@ -18,7 +18,7 @@ class Contractor(Changeable):
                                      max_length=256)
     address_rus = models.CharField(verbose_name=u'Адрес (рус.)',
                                      max_length=512)
-    # logo = models.ImageField(verbose_name=u'Логотип', upload_to='/logo/')
+    logo = models.ImageField(verbose_name=u'Логотип', upload_to='logo/')
 
     def __unicode__(self):
         return self.name_eng
