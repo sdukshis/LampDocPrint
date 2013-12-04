@@ -11,7 +11,7 @@
     {% endif %}
     {% if form.errors %}
     <div class="alert alert-danger">
-        Вы ввели некорректные или неполные данные.
+        {% trans "You have entered invalid data!" %}
     </div>
     {% endif %}
     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
@@ -19,14 +19,14 @@
     {{ form|bootstrap_horizontal }}
     <div class="row">
         <div class="col-md-1 col-md-offset-5">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         </div>
         <div class="col-md-1">
-            <button type="reset" class="btn btn-default">Cancel</button>
+            <button type="reset" class="btn btn-default">{% trans "Cancel" %}</button>
         </div>
         {% if form.instance.pk %}
         <div class="col-md-1 col-md-offset-4">
-            <a href="{% url 'contractor_delete' form.instance.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'contractor_delete' form.instance.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
         </div>
         {% endif %}
     </div>

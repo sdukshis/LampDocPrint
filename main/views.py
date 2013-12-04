@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages 
+from django.utils.translation import ugettext as _
 
 from main.models import Contractor
 
@@ -19,7 +20,7 @@ class ContractorList(ListView):
 class ContractorCreate(CreateView):
     model = Contractor
     def form_valid(self, form):
-        messages.success(self.request, "Successfully saved!")
+        messages.success(self.request, _('Successfully saved!'))
         return super(ContractorCreate, self).form_valid(form)
 
 
@@ -27,7 +28,7 @@ class ContractorUpdate(UpdateView):
     model = Contractor
 
     def form_valid(self, form):
-        messages.success(self.request, "Successfully saved!")
+        messages.success(self.request, _('Successfully saved!'))
         return super(ContractorUpdate, self).form_valid(form)
 
 
@@ -36,5 +37,5 @@ class ContractorDelete(DeleteView):
     success_url = reverse_lazy('contractors')
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "Object deleted!")
+        messages.success(self.request, _('Object deleted!'))
         return super(ContractorDelete, self).delete(request, *args, **kwargs)

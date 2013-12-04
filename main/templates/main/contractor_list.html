@@ -9,13 +9,13 @@
             </div>
         {% endfor %}
     {% endif %}
-    <a href="{% url 'contractor_add' %}"><button class="btn btn-primary" type="button">Add contractor</button></a>
+    <a href="{% url 'contractor_add' %}"><button class="btn btn-primary" type="button">{% trans "Add contractor" %}</button></a>
     <table class="table table-striped table-hover" data-provides="rowlink">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Address</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Address" %}</th>
             </tr>
         </thead>
         <tbody>
