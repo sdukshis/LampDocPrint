@@ -9,12 +9,12 @@
   <form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
   {% csrf_token %}
     {% if form.errors %}
-    <div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
+    <div class="alert alert-danger">{% trans "Your username and password didn't match. Please try again." %}</div>
     {% endif %}
-    <h2 class="form-signin-heading">Please sign in</h2>
+    <h2 class="form-signin-heading">{% trans "Please sign in" %}</h2>
     <input name="{{ form.username.name }}" type="text" class="form-control" placeholder="{{ form.username.label }}" required autofocus>
     <input name="{{ form.password.name }}"  type="password" class="form-control" placeholder="{{ form.password.label }}" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Sign in" %}</button>
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 </div><!-- /.container -->
