@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block container %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <a href="{% url 'lamp_add' %}"><button class="btn btn-primary" type="button">{% trans "Add lamp" %}</button></a>
+    <table class="table table-striped table-hover" data-provides="rowlink">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Brand" %}</th>
+                <th>{% trans "Article" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lamp in object_list %}
+                <tr onclick="location.href='{% url 'lamp_update' lamp.id %}'">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ lamp.name }}</td>
+                    <td>{{ lamp.brand }}</td>
+                    <td>{{ lamp.article }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

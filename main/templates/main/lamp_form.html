@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+{% load bootstrap %}
+{% load i18n %}
+
+{% block container %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        {% trans "You have entered invalid data!" %}
+    </div>
+    {% endif %}
+    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|bootstrap_horizontal }}
+    <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+        </div>
+        <div class="col-md-1">
+            <button type="reset" class="btn btn-default">{% trans "Cancel" %}</button>
+        </div>
+        {% if form.instance.pk %}
+        <div class="col-md-1 col-md-offset-4">
+            <a href="{% url 'lamp_delete' form.instance.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+        </div>
+        {% endif %}
+    </div>
+    </form>
+{% endblock %}
